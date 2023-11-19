@@ -2,7 +2,6 @@ import homeIcon from '../images/icons8-home.svg';
 import spotIcon from '../images/icons8-animal-60.png';
 import porfileIcon from '../images/icons8-customer-26.png';
 import './Header.scss';
-import HomePage from '../HomePage/HomePage';
 
 function Header() {
     return (
@@ -12,7 +11,6 @@ function Header() {
             <img className='icon-spot' src={spotIcon}></img>
             <img className='icon-porfile' src={porfileIcon}></img>
         </header>
-        <HomePage />
         </>
     )
 }
