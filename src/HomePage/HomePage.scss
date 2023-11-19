@@ -1,0 +1,30 @@
+.HomePage{
+    margin: 1vh;
+}
+.main-picName{
+    display: flex;
+    align-items: center
+}
+.porfileName{
+    margin-top: 2vh;
+    margin-left: 2vh;
+}
+.main-porfilePic{
+    border-radius: 50%;
+    background-color: grey;
+    height: 5vh;
+    width: 5vh;
+    margin-top: 2vh;
+}
+
+.postPic{
+    margin-top: 2vh;
+    width: 100%;
+}
+.like {
+    height: 4vh;
+    margin-right: 1vh;
+}
+.comment {
+    height: 4vh;
+}
