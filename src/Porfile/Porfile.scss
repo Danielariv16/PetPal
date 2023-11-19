@@ -1,0 +1,12 @@
+.porfile_section {
+    &-container1 {
+        display: flex;
+        align-items: center
+    }
+    &-pic {
+        border-radius: 50%;
+        height: 10vh;
+        width: 10vh;
+        background-color: grey;
+    }
+}
