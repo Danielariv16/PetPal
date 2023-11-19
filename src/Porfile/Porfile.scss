@@ -1,12 +1,37 @@
 .porfile_section {
+    margin: 1rem;
     &-container1 {
         display: flex;
-        align-items: center
+        align-items: center;
+        margin-top: 3rem;
+    }
+    &-name {
+        margin: 0;
     }
     &-pic {
         border-radius: 50%;
-        height: 10vh;
-        width: 10vh;
+        height: 13vh;
+        width: 13vh;
         background-color: grey;
     }
+    &-aboutYou {
+        margin-right: 5vh;
+    }
+    &-edit {
+        margin-right: 2vh;
+        height: 4vh;
+    }
+    &-add {
+        height: 4vh;
+    }
+   
+}
+.pictures {
+    margin-top: 1rem;
+}
+.images {
+    width: 15vh;
+    height: 15vh;
+    background-color: grey;
+    border-radius: 5px;
 }

@@ -10,7 +10,7 @@ function Porfile(){
         <section className='porfile_section'>
             <div className='porfile_section-container1'>
                 <div className='porfile_section-aboutYou'>
-                    <h6 className='porfile_section-name'>Daniela</h6>
+                    <h4 className='porfile_section-name'>Daniela</h4>
                     <p className='porfile_section-about'>
                         Major es amante a cazar, le gusta dormir y comer mucho
                     </p>
@@ -24,6 +24,10 @@ function Porfile(){
                     <img className='porfile_section-edit' src={porfileEdit}></img>
                     <img className='porfile_section-add' src={addPic}></img>
                 </div>
+                <section className='pictures'>
+                    {/* <img className='images'></img> */}
+                    <div className='images'></div>
+                </section>
         </section>
         </>
     )
