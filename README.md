@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# Project Title
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+PetPal is a platform designed for pet enthusiasts and owners to effortlessly share their cherished moments through pictures with a global audience. More than just a social media network, PetPal serves as a compassionate space dedicated to aiding pets in need of a loving home. We shine a spotlight on lovable pets looking for homes on our website, providing users with the opportunity to make a positive impact in the lives of these animals. Engage in meaningful interactions with fellow pet owners and participate in our monthly challenges, creating a vibrant and supportive community within the PetPal network. Embrace the joy of connecting with like-minded individuals while contributing to the well-being of pets in search of a forever home.
 
-In the project directory, you can run:
+### Problem
 
-### `npm start`
+Combining everything that we love in order to create a positive enviroment where people can go and not only enjoy the menaningful moments of others but where we can see what pets need help, in this case having a spotlight in the app where the world can see:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. How many pets are in shelters and how alarming is this.
+2. Help in any way these animals, either sharing, going visit, adopting and providing to the cause of why theres so many animals in shelters.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### User Profile
 
-### `npm test`
+PetPal would not requiere to have an account? but in order to post you would need to create an account. My audience target is pet lovers but it can be use by anyone as long as they dont mean any harm to the community.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Features
 
-### `npm run build`
+The navigation of this app would be pretty simple, we love that its not too much neither too simple but something that its clear and you can navigate on. I would divide my app initially in two sections.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Home, where you can see all pictures that other people have post, be able to like and comment.
+2. Spotlight feature where pets in need of home would be shown.
+3. Porfile section
+   
+## Implementation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Firebase, JavaScript, React Router Dom, HTML, CSS, Scss, React, Node.js, API
 
-### `npm run eject`
+### APIs
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+https://www.petfinder.com/developers/v2/docs/
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Sitemap
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Comments - where comments of post would go
+Home - homepage where all pics of everybody is gonna be
+Porfile - your porfile section
+Spotlight - adoption spotlight
+### Mockups
+https://www.canva.com/design/DAF0WjuZXI4/S-ZVipQBV80jXL-kBenL4Q/edit
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Data
 
-## Learn More
+Users Table:
+  Columns:
+    - user_id (Primary Key)
+    - full_name
+    - email
+    - username
+    - password (hashed, not stored in plain text)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Posts Table:
+  Columns:
+    - post_id (Primary Key)
+    - user_id (Foreign Key referencing Users table)
+    - image_url 
+    - caption
+    - created_at
+    
+Likes Table:
+  Columns:
+    - like_id (Primary Key)
+    - user_id (Foreign Key referencing Users table)
+    - post_id (Foreign Key referencing Posts table)
+    - created_at
+    
+Comments Table:
+  Columns:
+    - comment_id (Primary Key)
+    - user_id (Foreign Key referencing Users table)
+    - post_id (Foreign Key referencing Posts table)
+    - comment_text
+    
+### Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+/homepage
+/profile
+/spot-light
+/comments
 
-### Code Splitting
+### Auth
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+FireBase auth
 
-### Analyzing the Bundle Size
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Sprint 1 - Front-End 
+Spint 2- Back-End
+Sprint 3 - Adding everything together
+Sprint 4 - testing and fixing bugs
+Sprint 5 - Final product
 
-### Making a Progressive Web App
+## Nice-to-haves
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Challenge section so the community can interact with each other
+Messages section
