@@ -1,4 +1,4 @@
-#PetPal
+## PetPal
 
 ## Overview
 
