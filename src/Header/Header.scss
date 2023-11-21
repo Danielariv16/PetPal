@@ -1,22 +1,18 @@
 .navtab {
-    background-color: #008080;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
 }
 .icon{
 
     &-porfile{
         height: 5vh;
-        border-left: 1px solid #ffff;        
-        padding: 0.5rem 0 0.5rem 2rem;
     }
     &-home {
         height: 5vh;
-        padding: 0.5rem 0;
     }
     &-spot {
-        height: 5vh;
-        border-left: 1px solid #ffff;
-        padding: 0.5rem 0 0.5rem 2rem;
+        height: 6vh;
+
     }
 }

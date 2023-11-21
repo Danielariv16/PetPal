@@ -1,7 +1,7 @@
 import './HomePage.scss';
 import trying from '../images/staticImage.jpg';
-import heartIcon from '../images/icons8-heart-30 (1).png';
-import commentIcon from '../images/icons8-comment-30.png';
+import heartIcon from '../images/heartLike.png';
+import commentIcon from '../images/comment.png';
 import Header from '../Header/Header';
 
 function HomePage(){

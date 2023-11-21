@@ -1,0 +1,14 @@
+.comments_section{
+    &-nav {
+        display: flex; 
+        align-items: center;
+    }
+}
+
+.comments_back {
+    display: flex;
+}
+
+.comments_title {
+    margin-left: 15vh;
+}

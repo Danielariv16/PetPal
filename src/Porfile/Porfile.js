@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import './Porfile.scss';
-import porfileEdit from '../images/icons8-registration-30.png';
-import addPic from '../images/icons8-add-30.png'
+import porfileEdit from '../images/edit.png';
+import addPic from '../images/add.png'
 
 function Porfile(){
     return (

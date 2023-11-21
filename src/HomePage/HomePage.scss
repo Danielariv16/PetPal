@@ -23,9 +23,14 @@
     width: 100%;
 }
 .like {
-    height: 4vh;
+    height: 3.5vh;
     margin-right: 1vh;
 }
 .comment {
-    height: 4vh;
+    height: 3vh;
+}
+
+.reaction-container{
+    display: flex;
+    align-items: center;
 }
