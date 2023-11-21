@@ -2,6 +2,7 @@ import Header from '../Header/Header';
 import './Porfile.scss';
 import porfileEdit from '../images/edit.png';
 import addPic from '../images/add.png'
+import { Link } from 'react-router-dom';
 
 function Porfile(){
     return (
@@ -22,7 +23,9 @@ function Porfile(){
             </div>
                 <div className='porfile_section-buttons'>
                     <img className='porfile_section-edit' src={porfileEdit}></img>
-                    <img className='porfile_section-add' src={addPic}></img>
+                    <Link to={'/add-post'}>
+                        <img className='porfile_section-add' src={addPic}></img>
+                    </Link>
                 </div>
                 <section className='pictures'>
                     {/* <img className='images'></img> */}
