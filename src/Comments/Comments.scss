@@ -1,14 +1,63 @@
 .comments_section{
+    margin: 1vh;
     &-nav {
         display: flex; 
         align-items: center;
     }
+    &-arrow {
+        width: 5vw;
+        height: 4vh;
+
+    }
+    &-profile {
+        background-color: grey;
+        border-radius: 50%;
+        height: 5vh;
+        width: 5vh;
+        margin-right: 2vw;
+    }
 }
 
-.comments_back {
+.comments{
+    &_back {
     display: flex;
+    align-items: center;
+}
+    &_title {
+        margin-left: 14vh;
+    }
 }
 
-.comments_title {
-    margin-left: 15vh;
+.back {
+    margin: 0;
 }
+
+.button-back {
+    background: none;
+    border: none;
+    margin-top: 1vh;
+}
+
+.comment-input {
+    border-radius: 5px;
+    width: 95vw;
+    resize: none; 
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 2vh;
+}
+.all_comments {
+    display: flex;
+    margin: 1vh;
+   &-name {
+    margin: 0;
+   }
+   &-commentName{
+    width: 100%;
+   }
+
+}
+.post-comment {
+    margin: 0;
+}
+
