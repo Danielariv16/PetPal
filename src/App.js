@@ -4,6 +4,7 @@ import HomePage from './HomePage/HomePage';
 import SpotLight from './SpotLight/SpotLight';
 import Porfile from './Porfile/Porfile';
 import Comments from './Comments/Comments';
+import AddPost from './AddPost/AddPost';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/spot-light' element={<SpotLight/>}></Route>
         <Route path='/porfile' element={<Porfile />}></Route>
         <Route path='/comments' element={<Comments/>}></Route>
+        <Route path='/add-post' element={<AddPost />}></Route>
 
       </Routes>
 
