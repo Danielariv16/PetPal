@@ -1,4 +1,4 @@
-import arrow from '../images/icons8-arrow-24.png';
+import arrow from '../images/arrow.png';
 import './Comments.scss';
 
 
