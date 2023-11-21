@@ -1,0 +1,42 @@
+.sign_in {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 6rem;
+    top: 4rem;
+        &-logo {
+            width: 40vw;
+            margin-bottom: 2rem;
+            height: 20vh;
+            margin-left: 0.5rem;
+        }
+        &-or {
+            text-align: center;
+        }
+        &-email {
+            margin-bottom: 1rem;
+            height: 2vh;
+            border-radius: 5px;
+            border: 1px solid  #008080;
+            padding: 0.5rem;
+
+
+        }
+        &-password {
+             height: 2vh;
+             border-radius: 5px;
+             border: 1px solid  #008080;
+             border-radius: 5px;
+             padding: 0.5rem;
+
+
+        }
+        &-logIn{
+            margin-top: 1rem;
+            background-color: #008080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 4vh;
+        }
+}
