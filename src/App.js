@@ -6,6 +6,7 @@ import Porfile from './components/Porfile/Porfile';
 import Comments from './components/Comments/Comments';
 import AddPost from './components/AddPost/AddPost';
 import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/porfile' element={<Porfile />}></Route>
         <Route path='/comments' element={<Comments/>}></Route>
         <Route path='/add-post' element={<AddPost />}></Route>
+        <Route path='sign-up' element={<SignUp/>}></Route>
 
       </Routes>
 

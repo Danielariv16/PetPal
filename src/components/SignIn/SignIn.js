@@ -10,14 +10,18 @@ function SignIn(){
 
     const signIn = (e) =>{
         e.preventDefault()
+        try {
+            signInWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+           
+              })
 
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-       
-          })
-          .catch((err) => {
+              console.log('sign in sucessful')
+
+        }
+        catch (err) {
             console.error(err)
-          });
+        }
     } 
 
 
