@@ -42,6 +42,7 @@ function SignIn(){
             <button className='sign_in-logIn'
             onClick={signIn}>Log in</button>
             <p className='sign_in-or'>━━━━━ or ━━━━━</p>
+            
         </section>
         </>
     )
