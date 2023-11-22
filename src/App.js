@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage/HomePage';
-import SpotLight from './SpotLight/SpotLight';
-import Porfile from './Porfile/Porfile';
-import Comments from './Comments/Comments';
-import AddPost from './AddPost/AddPost';
-import SignIn from './SignIn/SignIn';
+import HomePage from './components/HomePage/HomePage';
+import SpotLight from './components/SpotLight/SpotLight';
+import Porfile from './components/Porfile/Porfile';
+import Comments from './components/Comments/Comments';
+import AddPost from './components/AddPost/AddPost';
+import SignIn from './components/SignIn/SignIn';
 
 function App() {
   return (
