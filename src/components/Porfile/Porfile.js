@@ -4,16 +4,23 @@ import porfileEdit from '../images/edit.png';
 import addPic from '../images/add.png'
 import { Link } from 'react-router-dom';
 import { db, auth } from '../../config/firebase';
-import { getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection, where, query } from 'firebase/firestore'
 import {useEffect, useState} from 'react'
 import { signOut  } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
+
+
+
 function Porfile(){
-    const [userName, setUserName ] = useState(null)
+    const [userName, setUserName ] = useState(null);
+    const [userImages, setUserImages] = useState([]);
+
+
     const usersCollection = collection(db, 'users')
-    const user = auth.currentUser;
+    
     const navigate = useNavigate(); 
+    const user = auth.currentUser;
     
     useEffect(() => {
         const response = async () => {
@@ -33,6 +40,24 @@ function Porfile(){
 
         response()
     }, [])
+
+    useEffect(() => {
+        const imagesOfUser = async () => {
+            try {
+                const userImagesQuery = query(collection(db, 'Post-Table'), where('user_id', '==', user.uid));
+                const userImagesSnapshot = await getDocs(userImagesQuery);
+                const imageUrls = userImagesSnapshot.docs.map(doc => doc.data().image_url);
+
+                setUserImages(imageUrls)
+
+            } catch (error) {
+                console.error('Error getting images:');
+            }
+        };
+    
+        imagesOfUser();
+    }, []);
+    
 
     const logout = async () => {
         try {
@@ -70,9 +95,16 @@ function Porfile(){
                     </Link>
                 </div>
                 <section className='pictures'>
-                    {/* <img className='images'></img> */}
-                    <div className='images'></div>
+                    {/* <img className='images' src={userImages}></img> */}
+                    {/* <div className='images'></div> */}
                 </section>
+                {
+                    userImages?.map((image) =>(
+                        
+                        <img className='images' src={image}></img>
+                        
+                    ))
+                }
         </section>
         </>
     )

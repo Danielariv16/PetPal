@@ -15,6 +15,7 @@ function SignUp(){
 
      const usersCollection = collection(db , 'users')
 
+
     const signUp = async () =>{
         try{
             await addDoc(usersCollection, 

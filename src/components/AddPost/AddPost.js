@@ -5,17 +5,37 @@ import arrow from '../images/arrow.png';
 import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from "firebase/storage";
 import { useState} from 'react'
-import {v4} from 'uuid'
+import {v4} from 'uuid';
+import {getDocs, collection, addDoc} from 'firebase/firestore';
+import { auth, db } from '../../config/firebase';
+import { getDownloadURL } from "firebase/storage";
+
+
+
 
 function AddPost(){
     const [uploadImage, setUploadImage] =  useState(null);
 
-    const imageUpload = () => {
+    const postCollection = collection(db , 'Post-Table')
+    const user = auth.currentUser;
+
+
+
+    const imageUpload = async () => {
         if(uploadImage == null) return
 
         const homeImagesRef = ref(storage, `imagesHome/ ${uploadImage.name + v4()}`)
         try {
-            uploadBytes(homeImagesRef, uploadImage)}
+            await uploadBytes(homeImagesRef, uploadImage)
+            const uploadUrl =  await getDownloadURL(homeImagesRef)
+
+            await addDoc(postCollection,{
+                caption: '',
+                user_id: user.uid,
+                image_url: uploadUrl
+            })
+        }
+
         catch (err){
             console.error(err)
         }
