@@ -1,5 +1,4 @@
 import './HomePage.scss';
-import trying from '../images/staticImage.jpg';
 import heartIcon from '../images/heartLike.png';
 import commentIcon from '../images/comment.png';
 import Header from '../Header/Header';
@@ -42,34 +41,21 @@ function HomePage(){
         <>
             <Header />
             <main className='HomePage'>
-                {/* <div className='main-picName'>
-                    <div className='main-porfilePic'></div>
-                    <h6 className='porfileName'>Name</h6>
-                </div>
-                <img className='postPic' src={trying}></img>
-                <div className='reaction-container'>
-                    <img className='like' src={heartIcon}></img>
-                    <Link to={'/comments'}>
-                        <img className='comment' src={commentIcon}></img>
-                    </Link>
-                </div> */}
-                {
-                    images?.map((url) =>(
-                        <>
+                {images?.map((url) =>(
+                    <>
                         <div className='main-picName'>
-                        <div className='main-porfilePic'></div>
-                        <h6 className='porfileName'>Name</h6>
-                    </div>
-                    <img className='postPic' src={url}></img>
-                    <div className='reaction-container'>
-                        <img className='like' src={heartIcon}></img>
-                        <Link to={'/comments'}>
+                            <div className='main-porfilePic'></div>
+                            <h6 className='porfileName'>Name</h6>
+                        </div>
+                        <img className='postPic' src={url}></img>
+                        <div className='reaction-container'>
+                            <img className='like' src={heartIcon}></img>
+                            <Link to={'/comments'}>
                             <img className='comment' src={commentIcon}></img>
-                        </Link>
-                    </div>
-                        </>
-                    ))
-                }
+                            </Link>
+                        </div>
+                    </>
+                    ))}
             </main>
         
         </>
