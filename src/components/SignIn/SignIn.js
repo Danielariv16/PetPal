@@ -3,26 +3,31 @@ import logo from '../images/logo.png';
 import { auth } from '../../config/firebase';
 import { signInWithEmailAndPassword  } from 'firebase/auth';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function SignIn(){
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('')
     const [password, setPassword] =  useState('')
+    const navigate = useNavigate();
 
     const signIn = (e) =>{
         e.preventDefault()
         try {
             signInWithEmailAndPassword(auth, email, password)
               .then((userCredential) => {
-           
+                navigate('/');
+
               })
 
               console.log('sign in sucessful')
-
-        }
-        catch (err) {
-            console.error(err)
-        }
-    } 
+              
+            }
+            catch (err) {
+                console.error(err)
+            }
+        } 
+        
 
 
     return(

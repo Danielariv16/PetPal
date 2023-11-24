@@ -1,29 +1,36 @@
 import './SignUp.scss';
 import logo from '../images/logo.png';
-import { auth } from '../../config/firebase';
+import { auth, db } from '../../config/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import {getDocs, collection, addDoc} from 'firebase/firestore';
 
 
 function SignUp(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] =  useState('')
+    const [newemail, setNewEmail] = useState('');
+    const [newpassword, setNewPassword] =  useState('')
+    const [newUsername, setNewUsername] = useState('')
+    const [newName, setNewName] = useState('')
 
+     const usersCollection = collection(db , 'users')
 
-    const signUp = () =>{
-        
+    const signUp = async () =>{
         try{
-            createUserWithEmailAndPassword(auth, email, password)
+            await addDoc(usersCollection, 
+                {username: newUsername, 
+                email: newemail, 
+                full_name: newName, 
+                password: newpassword})
+
+            createUserWithEmailAndPassword(auth, newemail, newpassword,newUsername, newName )
               .then((userCredential) => {
               })
-            // await createUserWithEmailAndPassword(auth, newEmail, newPassword, newUsername, newName)
         }
         catch (err) {
             console.error(err)
         }
     } 
-
 
 
     return (
@@ -32,19 +39,21 @@ function SignUp(){
             <img src={logo} className='sign_in-logo'></img>
             <input name='email' className='sign_in-email2' 
             placeholder='Email' 
-            onChange={(e)=> setEmail(e.target.value)}>
+            onChange={(e)=> setNewEmail(e.target.value)}>
             </input>
             <input name='name' className='sign_in-name' 
-            placeholder='Full Name' >
+            placeholder='Full Name'
+            onChange={(e)=> setNewName(e.target.value)} >
             </input>
             <input name='username' className='sign_in-username' 
-            placeholder='Username' >
+            placeholder='Username' 
+            onChange={(e)=> setNewUsername(e.target.value)}>
             </input>
             <input name='password' 
             className='sign_in-password' 
             placeholder='Password' 
             type='password'
-            onChange={(e)=> setPassword(e.target.value)}>
+            onChange={(e)=> setNewPassword(e.target.value)}>
             </input>
             <button className='sign_in-logIn'
             onClick={signUp}>Sign Up</button>

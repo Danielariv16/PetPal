@@ -12,7 +12,7 @@ function HomePage(){
             <main className='HomePage'>
                 <div className='main-picName'>
                     <div className='main-porfilePic'></div>
-                    <h7 className='porfileName'>Name</h7>
+                    <h6 className='porfileName'>Name</h6>
                 </div>
                 <img className='postPic' src={trying}></img>
                 <div className='reaction-container'>
