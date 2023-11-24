@@ -95,16 +95,13 @@ function Porfile(){
                     </Link>
                 </div>
                 <section className='pictures'>
-                    {/* <img className='images' src={userImages}></img> */}
-                    {/* <div className='images'></div> */}
-                </section>
                 {
                     userImages?.map((image) =>(
-                        
                         <img className='images' src={image}></img>
                         
                     ))
                 }
+                </section>
         </section>
         </>
     )

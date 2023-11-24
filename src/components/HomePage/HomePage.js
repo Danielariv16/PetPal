@@ -4,51 +4,55 @@ import commentIcon from '../images/comment.png';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { storage } from '../../config/firebase';
+import { db } from '../../config/firebase';
+import { getDocs, collection, where, query } from 'firebase/firestore'
+
 
 
 
 function HomePage(){
 
-    const imagesFolder = ref(storage, 'imagesHome');
-    
-    const [images, setImages] = useState([]);
+    const postTable = collection(db, 'Post-Table')
+
+    const [descriptionImage, setDescriptionImage] = useState([])
 
 
     useEffect(() => {
-        const getImages = async () => {
+        const post = async() => {
             try {
-                const response = await listAll(imagesFolder);
-                const urls = [];
-    
-                for (const item of response.items) {
-                    const url = await getDownloadURL(item);
-                    urls.push(url);
-                }
-    
-                setImages(urls);
-            } catch (error) {
-                console.error('Error getting images:');
+                const response =  await getDocs(postTable);
+
+                const filteredData =  response.docs.map((doc) => 
+                ({...doc.data(), 
+                    id: doc.id
+                }))
+
+                setDescriptionImage(filteredData)
             }
-        };
-    
-        getImages();
-    }, []);
-    
+            catch(err){
+                console.error(err)
+            }
+        }
+        post()
+    }, [])
+
 
     return (
         <>
             <Header />
             <main className='HomePage'>
-                {images?.map((url) =>(
+                {descriptionImage?.map((data) =>(
+                    
                     <>
                         <div className='main-picName'>
                             <div className='main-porfilePic'></div>
                             <h6 className='porfileName'>Name</h6>
                         </div>
-                        <img className='postPic' src={url}></img>
-                        <div className='reaction-container'>
+                        <img className='postPic' src={data.image_url}></img>
+                        {data.caption && (
+                            <p className='description'>{data.caption}</p>
+                            )}                        
+                            <div className='reaction-container'>
                             <img className='like' src={heartIcon}></img>
                             <Link to={'/comments'}>
                             <img className='comment' src={commentIcon}></img>

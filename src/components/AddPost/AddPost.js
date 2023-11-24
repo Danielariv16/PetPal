@@ -15,6 +15,7 @@ import { getDownloadURL } from "firebase/storage";
 
 function AddPost(){
     const [uploadImage, setUploadImage] =  useState(null);
+    const [description, setDescription] = useState('');
 
     const postCollection = collection(db , 'Post-Table')
     const user = auth.currentUser;
@@ -30,10 +31,11 @@ function AddPost(){
             const uploadUrl =  await getDownloadURL(homeImagesRef)
 
             await addDoc(postCollection,{
-                caption: '',
+                caption: description,
                 user_id: user.uid,
                 image_url: uploadUrl
             })
+
         }
 
         catch (err){
@@ -64,6 +66,7 @@ function AddPost(){
                 onChange={(e) => {setUploadImage(e.target.files[0])}}>
             </input>
             <h6 className='add_post-addDesc'>ADD DESCRIPTION</h6>
+            <textarea className='add_post-desc' onChange={(e) => {setDescription(e.target.value)}}></textarea>
             <button className='add_post-share'onClick={imageUpload}>Share <img src={share} className='share-image'></img></button>
 
         </section>
