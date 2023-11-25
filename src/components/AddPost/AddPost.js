@@ -6,7 +6,7 @@ import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from "firebase/storage";
 import { useState} from 'react'
 import {v4} from 'uuid';
-import {getDocs, collection, addDoc} from 'firebase/firestore';
+import {collection, addDoc} from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import { getDownloadURL } from "firebase/storage";
 
@@ -21,8 +21,6 @@ function AddPost(){
     const postCollection = collection(db , 'Post-Table')
     const user = auth.currentUser;
     
-    console.log(user)
-
 
     const imageUpload = async () => {
         if(uploadImage == null) return

@@ -4,7 +4,7 @@ import { auth, db } from '../../config/firebase';
 import { createUserWithEmailAndPassword, updateProfile  } from 'firebase/auth'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import {getDocs, collection, addDoc} from 'firebase/firestore';
+import {collection, addDoc} from 'firebase/firestore';
 
 
 function SignUp(){
@@ -15,7 +15,7 @@ function SignUp(){
 
      const usersCollection = collection(db , 'users')
      
-     
+    
      
      const signUp = async () =>{
          try{
