@@ -53,7 +53,7 @@ function HomePage(){
                             )}                        
                             <div className='reaction-container'>
                             <img className='like' src={heartIcon}></img>
-                            <Link to={'/comments'}>
+                            <Link to={`/comments/${data.id}`}>
                             <img className='comment' src={commentIcon}></img>
                             </Link>
                         </div>

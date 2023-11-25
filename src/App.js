@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
 import SpotLight from './components/SpotLight/SpotLight';
@@ -16,7 +15,7 @@ function App() {
         <Route path='/'element={<HomePage />}></Route>
         <Route path='/spot-light' element={<SpotLight/>}></Route>
         <Route path='/porfile' element={<Porfile />}></Route>
-        <Route path='/comments' element={<Comments/>}></Route>
+        <Route path='/comments/:id' element={<Comments/>}></Route>
         <Route path='/add-post' element={<AddPost />}></Route>
         <Route path='sign-up' element={<SignUp/>}></Route>
 
