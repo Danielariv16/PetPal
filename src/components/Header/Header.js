@@ -1,6 +1,6 @@
-import homeIcon from '../images/home.png';
-import spotIcon from '../images/heart.png';
-import porfileIcon from '../images/porfile.png';
+import homeIcon from '../../images/home.png';
+import spotIcon from '../../images/heart.png';
+import porfileIcon from '../../images/porfile.png';
 import './Header.scss';
 import { Link } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import './SignIn.scss';
-import logo from '../images/logo.png';
+import logo from '../../images/logo.png';
 import { auth } from '../../config/firebase';
 import { signInWithEmailAndPassword  } from 'firebase/auth';
 import { useState } from 'react';

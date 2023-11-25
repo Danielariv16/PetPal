@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import './Porfile.scss';
-import porfileEdit from '../images/edit.png';
-import addPic from '../images/add.png'
+import porfileEdit from '../../images/edit.png';
+import addPic from '../../images/add.png'
 import { Link } from 'react-router-dom';
 import { db, auth } from '../../config/firebase';
 import { getDocs, collection, where, query} from 'firebase/firestore'

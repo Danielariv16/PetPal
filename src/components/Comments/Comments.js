@@ -1,4 +1,4 @@
-import arrow from '../images/arrow.png';
+import arrow from '../../images/arrow.png';
 import './Comments.scss';
 import { db, auth } from '../../config/firebase';
 import { getDocs, addDoc, collection, onSnapshot, query, where} from 'firebase/firestore'
@@ -46,7 +46,7 @@ function Comments(){
 
 
     const handleBackClick = () => {
-    window.history.back();
+        window.history.back();
       };
     
     return (

@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import './AddPost.scss';
-import share from '../images/share.png';
-import arrow from '../images/arrow.png';
+import share from '../../images/share.png';
+import arrow from '../../images/arrow.png';
 import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from "firebase/storage";
 import { useState} from 'react'

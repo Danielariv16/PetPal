@@ -1,6 +1,6 @@
 import Header from '../Header/Header';
 import './SpotLight.scss'
-import zeldris from '../images/Untitled design.jpg'
+import zeldris from '../../images/Untitled design.jpg'
 
 function SpotLight(){
     return (
