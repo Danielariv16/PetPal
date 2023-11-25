@@ -1,7 +1,7 @@
 import './SignUp.scss';
 import logo from '../images/logo.png';
 import { auth, db } from '../../config/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile  } from 'firebase/auth'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import {getDocs, collection, addDoc} from 'firebase/firestore';
@@ -14,15 +14,26 @@ function SignUp(){
     const [newName, setNewName] = useState('')
 
      const usersCollection = collection(db , 'users')
+     
+     
+     
+     const signUp = async () =>{
+         try{
+            const userCredential = await createUserWithEmailAndPassword(auth, newemail, newpassword);
+            const user = userCredential.user;
 
+            await updateProfile(user, {
+                displayName: newUsername,
+              });
+          
 
-    const signUp = async () =>{
-        try{
             await addDoc(usersCollection, 
-                {username: newUsername, 
+                {
+                displayName: newUsername, 
                 email: newemail, 
                 full_name: newName, 
-                password: newpassword})
+                password: newpassword
+            })
 
             createUserWithEmailAndPassword(auth, newemail, newpassword,newUsername, newName )
               .then((userCredential) => {

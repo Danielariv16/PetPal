@@ -4,7 +4,7 @@ import porfileEdit from '../images/edit.png';
 import addPic from '../images/add.png'
 import { Link } from 'react-router-dom';
 import { db, auth } from '../../config/firebase';
-import { getDocs, collection, where, query } from 'firebase/firestore'
+import { getDocs, collection, where, query} from 'firebase/firestore'
 import {useEffect, useState} from 'react'
 import { signOut  } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';

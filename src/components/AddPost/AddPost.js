@@ -14,12 +14,14 @@ import { getDownloadURL } from "firebase/storage";
 
 
 function AddPost(){
+
     const [uploadImage, setUploadImage] =  useState(null);
     const [description, setDescription] = useState('');
 
     const postCollection = collection(db , 'Post-Table')
     const user = auth.currentUser;
-
+    
+    console.log(user)
 
 
     const imageUpload = async () => {
@@ -33,7 +35,8 @@ function AddPost(){
             await addDoc(postCollection,{
                 caption: description,
                 user_id: user.uid,
-                image_url: uploadUrl
+                image_url: uploadUrl,
+                username: user.displayName
             })
 
         }

@@ -4,8 +4,8 @@ import commentIcon from '../images/comment.png';
 import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
-import { db } from '../../config/firebase';
-import { getDocs, collection, where, query } from 'firebase/firestore'
+import { db, auth } from '../../config/firebase';
+import { getDocs, collection } from 'firebase/firestore'
 
 
 
@@ -13,8 +13,15 @@ import { getDocs, collection, where, query } from 'firebase/firestore'
 function HomePage(){
 
     const postTable = collection(db, 'Post-Table')
+    // const usersCollection = collection(db, 'users')
 
-    const [descriptionImage, setDescriptionImage] = useState([])
+
+    const [descriptionImage, setDescriptionImage] = useState([]);
+    // const [userName, setUserName] = useState('')
+
+    // const user = auth.currentUser;
+    console.log(descriptionImage)
+
 
 
     useEffect(() => {
@@ -27,6 +34,7 @@ function HomePage(){
                     id: doc.id
                 }))
 
+              
                 setDescriptionImage(filteredData)
             }
             catch(err){
@@ -36,6 +44,41 @@ function HomePage(){
         post()
     }, [])
 
+    // const nose = descriptionImage.map(image => image.user_id)
+    // console.log(nose)
+
+    // useEffect(()=> {
+
+    //     const trying = async() => {
+    //         try {
+    //             const data = await getDocs(usersCollection);
+    //             const filteredData =  data.docs.map((doc) => 
+    //             ({...doc.data(), 
+    //                 id: doc.id
+    //             }))
+
+    //         const nose = descriptionImage.map(image => image.user_id)
+    //         const nose1 = filteredData.map(id => id.id)
+
+    //             const compare = () => {
+    //                 if (nose === nose1){
+    //                     setUserName(compare)
+    //                 }
+    //             }
+    //             compare()
+    //         }
+    //         catch(err){
+    //             console.error(err)
+    //         }
+
+    //     }
+    //     trying()
+    // })
+
+
+
+
+
 
     return (
         <>
@@ -44,9 +87,9 @@ function HomePage(){
                 {descriptionImage?.map((data) =>(
                     
                     <>
-                        <div className='main-picName'>
+                        <div className='main-picName' key={data.id}>
                             <div className='main-porfilePic'></div>
-                            <h6 className='porfileName'>Name</h6>
+                            <h6 className='porfileName'>{data.username}</h6>
                         </div>
                         <img className='postPic' src={data.image_url}></img>
                         {data.caption && (
