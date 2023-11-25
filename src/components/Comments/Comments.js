@@ -21,7 +21,6 @@ function Comments(){
 
 
         await addDoc(commentsCollection, {
-            comment_id: v4(),
             comment_text: comment,
             post_id:id,
             user_id:user.uid,

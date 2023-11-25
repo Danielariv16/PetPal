@@ -5,11 +5,11 @@ import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { db, auth } from '../../config/firebase';
-import { getDocs, collection, addDoc, query, where } from 'firebase/firestore'
+import { getDocs, collection, addDoc, query, where, deleteDoc } from 'firebase/firestore'
 
 
 function HomePage(){
-    
+
     const user = auth.currentUser;
 
     const postTable = collection(db, 'Post-Table');
@@ -19,8 +19,10 @@ function HomePage(){
     const [likesAmount, setLikesAmount] = useState(null)
 
 
-    const postId = descriptionImage.map(id => id.id)
+
+    const postId = descriptionImage.map(id => id.id) //array
     const likes = query(likesTable, where('post_id', '==', postId ))
+    // console.log(likes)
     
     useEffect(() => {
         const post = async() => {
@@ -50,22 +52,36 @@ function HomePage(){
 
     useEffect(()=> {
         getLikes()
-    })
+    }, [descriptionImage])
+    
 
     const addLike = async()=> {
+
         try {
-            await addDoc(likesTable, {
-            // post_id:descriptionImage.map(id => id.id),
-                post_id:postId,
-                user_id:user.uid,
         
-            })
+              const likeQuery = query(likesTable, where('post_id', '==', postId), where('user_id', '==', user.uid));
+              const likeSnapshot = await getDocs(likeQuery);
+        
+              if (!likeSnapshot.empty) {
+                const likeDoc = likeSnapshot.docs[0];
+                await deleteDoc(likeDoc.ref);
+              }
+
+            else {
+              await addDoc(likesTable, {
+                post_id: postId,
+                user_id: user.uid,
+              });
+              setLikesAmount(likesAmount + 1);
+            }
+            getLikes();
+
         } 
         catch(err){
             console.error(err)
             }
         }
-    
+
 
 
     return (
