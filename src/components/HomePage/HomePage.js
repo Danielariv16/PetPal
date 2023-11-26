@@ -10,6 +10,7 @@ import { getDocs, collection, addDoc, query, where, deleteDoc } from 'firebase/f
 
 function HomePage(){
 
+
     const user = auth.currentUser;
 
     const postTable = collection(db, 'Post-Table');

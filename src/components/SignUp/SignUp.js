@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, updateProfile  } from 'firebase/auth'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import {collection, addDoc} from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function SignUp(){
@@ -14,6 +16,8 @@ function SignUp(){
     const [newName, setNewName] = useState('')
 
      const usersCollection = collection(db , 'users')
+     const navigate = useNavigate();
+
      
     
      
@@ -37,6 +41,7 @@ function SignUp(){
 
             createUserWithEmailAndPassword(auth, newemail, newpassword,newUsername, newName )
               .then((userCredential) => {
+                  navigate('/sign-in');
               })
         }
         catch (err) {
