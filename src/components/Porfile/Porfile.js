@@ -3,12 +3,16 @@ import './Porfile.scss';
 import porfileEdit from '../../images/edit.png';
 import addPic from '../../images/add.png'
 import { Link } from 'react-router-dom';
-import { db, auth } from '../../config/firebase';
+import { db, auth, storage } from '../../config/firebase';
 import { getDocs, collection, where, query, 
-        doc, updateDoc, getDoc} from 'firebase/firestore'
+        doc, updateDoc, getDoc, addDoc} from 'firebase/firestore'
 import {useEffect, useState} from 'react'
 import { signOut  } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {v4} from 'uuid';
+
+
     
     
     function Porfile(){
@@ -30,6 +34,7 @@ import { useNavigate } from 'react-router-dom';
     };
     const saveChanges = async () => {
         updatePorfile();
+        // porfileImageUpload();
         setIsEditing(false);
     };
     
@@ -83,33 +88,73 @@ import { useNavigate } from 'react-router-dom';
     }, []);
     
 
-    const updatePorfile = async () => {
-        try {
-                const data = await getDocs(usersCollection)      
-                const filteredData =  data.docs.map((doc) => 
-                    ({...doc.data(), 
-                        id: doc.id
-                    }))
-                const currentUser =  filteredData.find((userData) => userData.email === user?.email)
+    // const updatePorfile = async () => {
+    //     try {
+    //             const data = await getDocs(usersCollection)      
+    //             const filteredData =  data.docs.map((doc) => 
+    //                 ({...doc.data(), 
+    //                     id: doc.id
+    //                 }))
+    //             const currentUser =  filteredData.find((userData) => userData.email === user?.email)
 
-                const userDocRef = doc(db, 'users', currentUser.id);
-                const userDocSnapshot = await getDoc(userDocRef);
-                const userData = userDocSnapshot.data();
+    //             const userDocRef = doc(db, 'users', currentUser.id);
+    //             const userDocSnapshot = await getDoc(userDocRef);
+    //             const userData = userDocSnapshot.data();
     
-                if (userData) {
-                    await updateDoc(userDocRef, {
-                        description: description,
-                        full_name: name,
-                        photoURL: porfilePic
-                    });
-                    console.log('Profile updated successfully');
-                } 
+    //             if (userData) {
+    //                 const porfileImagesRef = ref(storage, `porfilePics/ ${porfilePic.name + v4()}`)
+    //                 await uploadBytes(porfileImagesRef, porfilePic)
+    //                 const downloadURL  =  await getDownloadURL(porfileImagesRef)
+
+    //                 await updateDoc(userDocRef, {
+    //                     description: description,
+    //                     full_name: name,
+    //                     photoURL: downloadURL
+    //                 });
+    //                 console.log('Profile updated successfully');
+    //             } 
+    //         } 
+
+    //     catch (error) {
+    //         console.error('Error updating profile:', error);
+    //     }
+    // };
+
+
+const updatePorfile = async () => {
+    try {
+        const data = await getDocs(usersCollection);
+        const filteredData = data.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }));
+        const currentUser = filteredData.find((userData) => userData.email === user?.email);
+
+        const userDocRef = doc(db, 'users', currentUser.id);
+        const userDocSnapshot = await getDoc(userDocRef);
+        const userData = userDocSnapshot.data();
+
+        if (userData) {
+            if (porfilePic) {
+                const porfileImagesRef = ref(storage, `porfilePics/${user.uid}`);
+                await uploadBytes(porfileImagesRef, porfilePic);
+
+                const downloadURL = await getDownloadURL(porfileImagesRef);
+
+                await updateDoc(userDocRef, {
+                    description: description,
+                    full_name: name,
+                    photoURL: downloadURL
+                });
             } 
 
-        catch (error) {
-            console.error('Error updating profile:', error);
+            console.log('Profile updated successfully');
         }
-    };
+    } catch (error) {
+        console.error('Error updating profile:', error);
+    }
+};
+
 
 
     
@@ -118,8 +163,7 @@ import { useNavigate } from 'react-router-dom';
         <>
         <Header />
         <section className='porfile_section'>
-            {/* <div className='porfile_section-container1'> */}
-                {/* <div className='porfile_section-aboutYou'> */}
+
                     {
                         isEditing? (
                             <>
@@ -139,7 +183,6 @@ import { useNavigate } from 'react-router-dom';
                         <div className='porfile_section-container1'>
 
                             <div className='porfile_section-porfilePic'>
-                                {/* <div  className='porfile_section-pic'></div> */}
                                 <img className='porfile_section-pic' src={porfilePic}></img>
                                 <h4 className='porfile_section-username'>{userName}</h4>
                                 <button onClick={logout}>Log out</button>
@@ -171,9 +214,7 @@ import { useNavigate } from 'react-router-dom';
                             
                             )
                             
-                        }
-                {/* </div> */}
-            {/* </div> */}
+                    }
                 <section className='pictures'>
                 {
                     userImages?.map((image) =>(
