@@ -8,15 +8,22 @@
     }
     &-username {
         margin: 0;
+        color:#c2c3c4;
+        font-size: 0.8rem;
+        margin: 1vh 0;
     }
     &-pic {
         border-radius: 50%;
         height: 13vh;
         width: 13vh;
         background-color: grey;
+        margin-top: 2vh;
     }
     &-aboutYou {
         margin-right: 5vh;
+    }
+    &-about {
+        margin: 0;
     }
     &-edit {
         margin-right: 2vh;
@@ -25,6 +32,21 @@
     &-add {
         height: 4vh;
     }
+    &-porfilePic{
+        display: flex;
+        flex-direction: column;
+        align-items: center
+
+    }
+    &-logout{
+        border: 2px solid #0080803D;
+        color:white;
+        background-color: #008080;
+        border-radius: 20px;
+    }
+    &-buttons{
+        display: flex;
+    } 
    
 }
 .pictures {
@@ -38,4 +60,76 @@
     object-fit:cover;
     margin-right: 1vh;
 
+}
+
+.porfile-sec {
+    &-name{
+        margin: 0 0 2vh 0;
+    }
+}
+
+.edit-section {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5vh;
+}
+
+.edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 28vh
+}
+
+#porfileFile-label {
+    border-radius: 50%;
+    height: 13vh;
+    width: 13vh;
+    background-color: grey;
+    margin-bottom: 7vh;
+}
+
+#filePorfile{
+    display: none;
+}
+
+.input{
+    &-name{
+        margin: 0 0 2vh 0;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #008080;
+    }
+    &-description {
+        resize: none;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #008080;
+
+
+    }
+
+}
+
+.save-edit {
+    border: 2px solid #0080803D;
+    color:white;
+    background-color: #008080;
+    border-radius: 20px;
+    width: 20vw;
+    margin-top: 1vh;
+}
+
+.cancel-edit {
+    border: 2px solid #0080803D;
+    color:white;
+    background-color: #008080;
+    border-radius: 20px;
+    width: 20vw;
+    margin-top: 1vh;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: space-between;
 }

@@ -5,17 +5,15 @@ import addPic from '../../images/add.png'
 import { Link } from 'react-router-dom';
 import { db, auth, storage } from '../../config/firebase';
 import { getDocs, collection, where, query, 
-        doc, updateDoc, getDoc, addDoc} from 'firebase/firestore'
+        doc, updateDoc, getDoc} from 'firebase/firestore'
 import {useEffect, useState} from 'react'
 import { signOut  } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import {v4} from 'uuid';
-
+import upload from '../../images/upload.png';
 
     
-    
-    function Porfile(){
+function Porfile(){
         
     const [userName, setUserName ] = useState(null);
     const [name, setName] = useState(null);
@@ -34,9 +32,12 @@ import {v4} from 'uuid';
     };
     const saveChanges = async () => {
         updatePorfile();
-        // porfileImageUpload();
         setIsEditing(false);
     };
+
+    const cancelChanges = () => {
+        setIsEditing(false)
+    }
     
     const logout = async () => {
         try {
@@ -88,39 +89,6 @@ import {v4} from 'uuid';
     }, []);
     
 
-    // const updatePorfile = async () => {
-    //     try {
-    //             const data = await getDocs(usersCollection)      
-    //             const filteredData =  data.docs.map((doc) => 
-    //                 ({...doc.data(), 
-    //                     id: doc.id
-    //                 }))
-    //             const currentUser =  filteredData.find((userData) => userData.email === user?.email)
-
-    //             const userDocRef = doc(db, 'users', currentUser.id);
-    //             const userDocSnapshot = await getDoc(userDocRef);
-    //             const userData = userDocSnapshot.data();
-    
-    //             if (userData) {
-    //                 const porfileImagesRef = ref(storage, `porfilePics/ ${porfilePic.name + v4()}`)
-    //                 await uploadBytes(porfileImagesRef, porfilePic)
-    //                 const downloadURL  =  await getDownloadURL(porfileImagesRef)
-
-    //                 await updateDoc(userDocRef, {
-    //                     description: description,
-    //                     full_name: name,
-    //                     photoURL: downloadURL
-    //                 });
-    //                 console.log('Profile updated successfully');
-    //             } 
-    //         } 
-
-    //     catch (error) {
-    //         console.error('Error updating profile:', error);
-    //     }
-    // };
-
-
 const updatePorfile = async () => {
     try {
         const data = await getDocs(usersCollection);
@@ -167,14 +135,37 @@ const updatePorfile = async () => {
                     {
                         isEditing? (
                             <>
-
-                                <input className='input-name' onChange={(e) => setName(e.target.value)}></input>
-                                <input className='input-description'
-                                onChange={(e) => {setDescription(e.target.value)}}>
-                                </input>
-                                <input type='file' className='upload-porfile-image' 
-                                    onChange={(e) => {setPorfilePic(e.target.files[0])}}>
-                                 </input>
+                            <div className='edit'>
+                                <div className='edit-section'>
+                                    <input className='input-name' 
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder='Update your name'>
+                                    </input>
+                                    <textarea className='input-description'
+                                    onChange={(e) => {setDescription(e.target.value)}}
+                                    placeholder='Update your about me'>
+                                    </textarea>
+                                    <div className='edit-buttons'>
+                                    {
+                                        isEditing && (
+                                            <>
+                                            
+                                            <button className='save-edit' 
+                                            onClick={saveChanges}>Save</button>
+                                            <button className='cancel-edit'
+                                            onClick={cancelChanges}>Cancel</button>
+                                            </>
+                                                )  
+                                            }
+                                        </div>
+                                </div>
+                                <label id='porfileFile-label' htmlFor='filePorfile'>
+                                    <input name='filePorfile' id='filePorfile' type='file' className='upload-porfile-image' 
+                                        onChange={(e) => {setPorfilePic(e.target.files[0])}}>
+                                    </input>
+                                    <img src={upload} alt='upload your image'></img>
+                                </label>
+                            </div>
 
                             </>
 
@@ -184,8 +175,8 @@ const updatePorfile = async () => {
 
                             <div className='porfile_section-porfilePic'>
                                 <img className='porfile_section-pic' src={porfilePic}></img>
-                                <h4 className='porfile_section-username'>{userName}</h4>
-                                <button onClick={logout}>Log out</button>
+                                <p className='porfile_section-username'>{userName}</p>
+                                <button className='porfile_section-logout'onClick={logout}>Log out</button>
                             </div>
                             <div className='porfile_section-aboutYou'>
 
@@ -203,18 +194,10 @@ const updatePorfile = async () => {
                                         <img className='porfile_section-add' src={addPic}></img>
                                     </Link>
                                 </div>
-
                             </>
                         )
                     }
-                    {
-                        isEditing && (
-                            <button className='save-edit' 
-                            onClick={saveChanges}>Save</button>
-                            
-                            )
-                            
-                    }
+
                 <section className='pictures'>
                 {
                     userImages?.map((image) =>(

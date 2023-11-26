@@ -66,7 +66,7 @@ function AddPost(){
         <section className='add_post'>
             <h6 className='add_post-addImg'>ADD YOUR IMAGE</h6>
             <label id='file-label' htmlFor='file' >
-                <img src={upload}></img>
+                <img src={upload} alt='upload your image'></img>
             </label>
                 <input name='file' type='file' id='file' className='upload-image' 
                     onChange={(e) => {setUploadImage(e.target.files[0])}}>
