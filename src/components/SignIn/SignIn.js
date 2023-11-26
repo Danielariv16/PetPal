@@ -47,6 +47,9 @@ function SignIn(){
                     {
                         displayName: user.displayName, 
                         email: user.email, 
+                        full_name: user.displayName,
+                        description: '',
+                        photoURL:user.photoURL
                     })
                     .then((userCredential) => {
                         navigate('/');

@@ -37,7 +37,8 @@ function SignUp(){
                 email: newemail, 
                 full_name: newName, 
                 password: newpassword,
-                description: ''
+                description: '',
+                photoURL: user.photoURL
             })
 
             createUserWithEmailAndPassword(auth, newemail, newpassword,newUsername, newName )

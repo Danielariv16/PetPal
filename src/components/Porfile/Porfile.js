@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
     const [userImages, setUserImages] = useState([]);
     const [description, setDescription] =useState(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [porfilePic, setPorfilePic] = useState(null)
         
     
     const usersCollection = collection(db, 'users')
@@ -55,6 +56,7 @@ import { useNavigate } from 'react-router-dom';
                 setUserName(currentUser?.displayName)
                 setDescription(currentUser?.description); 
                 setName(currentUser?.full_name)
+                setPorfilePic(currentUser?.photoURL)
             }
             catch(err) {
                 console.error(err)
@@ -97,7 +99,8 @@ import { useNavigate } from 'react-router-dom';
                 if (userData) {
                     await updateDoc(userDocRef, {
                         description: description,
-                        full_name: name
+                        full_name: name,
+                        photoURL: porfilePic
                     });
                     console.log('Profile updated successfully');
                 } 
@@ -107,28 +110,47 @@ import { useNavigate } from 'react-router-dom';
             console.error('Error updating profile:', error);
         }
     };
+
+
     
     
     return (
         <>
         <Header />
         <section className='porfile_section'>
-            <div className='porfile_section-container1'>
-                <div className='porfile_section-aboutYou'>
-                    <h4 className='porfile_section-username'>{userName}</h4>
+            {/* <div className='porfile_section-container1'> */}
+                {/* <div className='porfile_section-aboutYou'> */}
                     {
                         isEditing? (
                             <>
+
                                 <input className='input-name' onChange={(e) => setName(e.target.value)}></input>
                                 <input className='input-description'
                                 onChange={(e) => {setDescription(e.target.value)}}>
                                 </input>
+                                <input type='file' className='upload-porfile-image' 
+                                    onChange={(e) => {setPorfilePic(e.target.files[0])}}>
+                                 </input>
+
                             </>
 
                         ) :(
                             <>
+                        <div className='porfile_section-container1'>
+
+                            <div className='porfile_section-porfilePic'>
+                                {/* <div  className='porfile_section-pic'></div> */}
+                                <img className='porfile_section-pic' src={porfilePic}></img>
+                                <h4 className='porfile_section-username'>{userName}</h4>
+                                <button onClick={logout}>Log out</button>
+                            </div>
+                            <div className='porfile_section-aboutYou'>
+
                                 <h3 className='porfile-sec-name'>{name}</h3>
                                 <p className='porfile_section-about'>{description}</p>
+
+                            </div>
+                                    </div>
                                 <div className='porfile_section-buttons'>
                                     <img className='porfile_section-edit' 
                                         src={porfileEdit}
@@ -138,6 +160,7 @@ import { useNavigate } from 'react-router-dom';
                                         <img className='porfile_section-add' src={addPic}></img>
                                     </Link>
                                 </div>
+
                             </>
                         )
                     }
@@ -149,13 +172,8 @@ import { useNavigate } from 'react-router-dom';
                             )
                             
                         }
-                </div>
-                <div className='porfile_section-porfilePic'>
-                    <div  className='porfile_section-pic'></div>
-                    {/* <img className='porfile_section-pic'></img> */}
-                    <button onClick={logout}>Log out</button>
-                </div>
-            </div>
+                {/* </div> */}
+            {/* </div> */}
                 <section className='pictures'>
                 {
                     userImages?.map((image) =>(

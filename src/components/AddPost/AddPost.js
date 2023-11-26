@@ -11,8 +11,6 @@ import { auth, db } from '../../config/firebase';
 import { getDownloadURL } from "firebase/storage";
 
 
-
-
 function AddPost(){
 
     const [uploadImage, setUploadImage] =  useState(null);
@@ -42,8 +40,8 @@ function AddPost(){
         catch (err){
             console.error(err)
         }
-        }
-    ;
+    }
+    
 
     const handleBackClick = () => {
         window.history.back();
