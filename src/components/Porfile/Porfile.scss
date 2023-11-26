@@ -3,9 +3,9 @@
     &-container1 {
         display: flex;
         align-items: center;
-        margin-top: 3rem;
+       justify-content: space-between;
     }
-    &-name {
+    &-username {
         margin: 0;
     }
     &-pic {
