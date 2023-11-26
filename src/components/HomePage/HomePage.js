@@ -23,7 +23,6 @@ function HomePage(){
 
     const postId = descriptionImage.map(id => id.id) //array
     const likes = query(likesTable, where('post_id', '==', postId ))
-    // console.log(likes)
     
     useEffect(() => {
         const post = async() => {
@@ -98,13 +97,16 @@ function HomePage(){
                         </div>
                         <img className='postPic' src={data.image_url}></img>
                         {data.caption && (
+                            <div className='descriptionWname'>
+                            <p className='porfileName-description'>{data.username}</p>
                             <p className='description'>{data.caption}</p>
+                            </div>
                             )}                        
                             <div className='reaction-container'>
                             <img className='like' src={heartIcon} onClick={addLike}></img>
-                            {likesAmount &&
+                            {/* {likesAmount &&
                             <p className='likes-amount'>Likes: {likesAmount} </p>
-                            }
+                            } */}
                             <Link to={`/comments/${data.id}`}>
                             <img className='comment' src={commentIcon}></img>
                             </Link>

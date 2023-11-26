@@ -7,8 +7,7 @@
     align-items: center
 }
 .porfileName{
-    margin-top: 2vh;
-    margin-left: 2vh;
+    margin: 2vh 0 0 1vh;
 }
 .main-porfilePic{
     border-radius: 50%;
@@ -36,4 +35,18 @@
 .reaction-container{
     display: flex;
     align-items: center;
+}
+.descriptionWname {
+    display: flex;
+    align-items: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.porfileName-description{
+    margin: 0;
+    margin-right: 1vh;
+    font-weight:500;
+}
+.description {
+    margin: 0;
 }
