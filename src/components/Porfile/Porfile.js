@@ -114,6 +114,16 @@ const updatePorfile = async () => {
                     full_name: name,
                     photoURL: downloadURL
                 });
+            }
+            if (name !== currentUser?.full_name || description !== currentUser?.description || porfilePic !==currentUser?.photoURL) 
+            {
+                await updateDoc(userDocRef, {
+                    description: description,
+                    full_name: name,
+                    photoURL: porfilePic
+
+
+                });
             } 
 
             console.log('Profile updated successfully');
