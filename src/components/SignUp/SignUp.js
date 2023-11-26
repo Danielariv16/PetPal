@@ -41,10 +41,8 @@ function SignUp(){
                 photoURL: user.photoURL
             })
 
-            createUserWithEmailAndPassword(auth, newemail, newpassword,newUsername, newName )
-              .then((userCredential) => {
-                  navigate('/sign-in');
-              })
+            navigate('/sign-in');
+
         }
         catch (err) {
             console.error(err)
