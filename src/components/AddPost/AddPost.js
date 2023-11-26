@@ -2,6 +2,7 @@ import Header from '../Header/Header';
 import './AddPost.scss';
 import share from '../../images/share.png';
 import arrow from '../../images/arrow.png';
+import upload from '../../images/upload.png';
 import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from "firebase/storage";
 import { useState} from 'react'
@@ -9,6 +10,7 @@ import {v4} from 'uuid';
 import {collection, addDoc} from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import { getDownloadURL } from "firebase/storage";
+import { useNavigate } from 'react-router-dom';
 
 
 function AddPost(){
@@ -18,7 +20,8 @@ function AddPost(){
 
     const postCollection = collection(db , 'Post-Table')
     const user = auth.currentUser;
-    
+
+    const navigate = useNavigate();
 
     const imageUpload = async () => {
         if(uploadImage == null) return
@@ -34,6 +37,7 @@ function AddPost(){
                 image_url: uploadUrl,
                 username: user.displayName
             })
+            navigate('/');
 
         }
 
@@ -61,9 +65,12 @@ function AddPost(){
 
         <section className='add_post'>
             <h6 className='add_post-addImg'>ADD YOUR IMAGE</h6>
-            <input type='file' className='upload-image' 
-                onChange={(e) => {setUploadImage(e.target.files[0])}}>
-            </input>
+            <label id='file-label' htmlFor='file' >
+                <img src={upload}></img>
+            </label>
+                <input name='file' type='file' id='file' className='upload-image' 
+                    onChange={(e) => {setUploadImage(e.target.files[0])}}>
+                </input>
             <h6 className='add_post-addDesc'>ADD DESCRIPTION</h6>
             <textarea className='add_post-desc' onChange={(e) => {setDescription(e.target.value)}}></textarea>
             <button className='add_post-share'onClick={imageUpload}>Share <img src={share} className='share-image'></img></button>

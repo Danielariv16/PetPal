@@ -16,3 +16,16 @@
     height: 3vh;
     margin-left: 1vh;
 }
+
+#file {
+    display: none;
+}
+
+.add_post-desc {
+    width: 100%;
+    resize: none;
+    height: 10vh;
+    border-radius: 5px;
+    border-color: #008080;
+    margin-bottom: 1rem;
+}
