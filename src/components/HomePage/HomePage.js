@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { db, auth } from '../../config/firebase';
 import { getDocs, collection, addDoc, query, where, deleteDoc } from 'firebase/firestore'
+import likeHeart from '../../images/heartLikeFill.png';
 
 
 function HomePage(){
@@ -18,7 +19,7 @@ function HomePage(){
 
     const [descriptionImage, setDescriptionImage] = useState([]);
     const [likesAmount, setLikesAmount] = useState(null)
-
+    const [userLikedPosts, setUserLikedPosts] = useState([]); // New state to store posts liked by the user
 
 
     const postId = descriptionImage.map(id => id.id) //array
@@ -45,10 +46,17 @@ function HomePage(){
     }, [])
     
 
-    const getLikes = async() =>{
-        const data = await getDocs(likes)
-        setLikesAmount(data.docs.length)
-    }
+    const getLikes = async () => {
+        try {
+            const data = await getDocs(likes);
+            setLikesAmount(data.docs.length);
+
+            const likedPosts = data.docs.map(doc => doc.data().post_id);
+            setUserLikedPosts(likedPosts);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(()=> {
         getLikes()
@@ -83,7 +91,6 @@ function HomePage(){
         }
 
 
-
     return (
         <>
             <Header />
@@ -92,7 +99,8 @@ function HomePage(){
                     
                     <>
                         <div className='main-picName' key={data.id}>
-                            <div className='main-porfilePic'></div>
+                            <img src={data.porfilePic} className='main-porfilePic'></img>
+                            {/* <div className='main-porfilePic'></div> */}
                             <h6 className='porfileName'>{data.username}</h6>
                         </div>
                         <img className='postPic' src={data.image_url}></img>
@@ -103,10 +111,15 @@ function HomePage(){
                             </div>
                             )}                        
                             <div className='reaction-container'>
-                            <img className='like' src={heartIcon} onClick={addLike}></img>
-                            {/* {likesAmount &&
+                            {/* <img className='like' src={heartIcon} onClick={addLike}></img> */}
+                            <img
+                                className='like'
+                                src={userLikedPosts.includes(data.id) ? likeHeart : heartIcon}
+                                onClick={addLike}
+                            ></img>
+                            {likesAmount &&
                             <p className='likes-amount'>Likes: {likesAmount} </p>
-                            } */}
+                            }
                             <Link to={`/comments/${data.id}`}>
                             <img className='comment' src={commentIcon}></img>
                             </Link>

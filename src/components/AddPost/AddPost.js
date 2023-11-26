@@ -7,7 +7,7 @@ import { storage } from '../../config/firebase';
 import { ref, uploadBytes } from "firebase/storage";
 import { useState} from 'react'
 import {v4} from 'uuid';
-import {collection, addDoc} from 'firebase/firestore';
+import {collection, addDoc, getDocs} from 'firebase/firestore';
 import { auth, db } from '../../config/firebase';
 import { getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
@@ -17,11 +17,27 @@ function AddPost(){
 
     const [uploadImage, setUploadImage] =  useState(null);
     const [description, setDescription] = useState('');
+    const [currentUser, setCurrentUser] = useState(null)
 
     const postCollection = collection(db , 'Post-Table')
+    const usersCollection = collection(db, 'users')
     const user = auth.currentUser;
 
     const navigate = useNavigate();
+
+    
+    const photo = async()=> {
+        const data = await getDocs(usersCollection);
+        const filteredData = data.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+        }));
+
+         const currentUser = filteredData.find((userData) => userData.email === user?.email);
+         setCurrentUser(currentUser)
+    }
+    photo()
+
 
     const imageUpload = async () => {
         if(uploadImage == null) return
@@ -35,7 +51,8 @@ function AddPost(){
                 caption: description,
                 user_id: user.uid,
                 image_url: uploadUrl,
-                username: user.displayName
+                username: user.displayName,
+                porfilePic: currentUser.photoURL
             })
             navigate('/');
 

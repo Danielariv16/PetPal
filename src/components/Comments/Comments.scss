@@ -45,6 +45,20 @@
     position: fixed;
     bottom: 0;
     margin-bottom: 2vh;
+    border: 2px solid #0080803D;
+}
+.button-comment {
+    border-radius: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 28.8rem;
+    margin-bottom: 2vh;
+    padding: 1vh;
+    height: 5vh;
+    background-color: #008080;
+    border: none;
+    color: white;
+
 }
 .all_comments {
     display: flex;

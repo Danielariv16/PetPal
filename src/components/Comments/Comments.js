@@ -2,7 +2,6 @@ import arrow from '../../images/arrow.png';
 import './Comments.scss';
 import { db, auth } from '../../config/firebase';
 import { getDocs, addDoc, collection, onSnapshot, query, where} from 'firebase/firestore'
-import {v4} from 'uuid';
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 

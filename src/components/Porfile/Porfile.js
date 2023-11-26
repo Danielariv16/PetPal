@@ -114,14 +114,16 @@ const updatePorfile = async () => {
                     full_name: name,
                     photoURL: downloadURL
                 });
+
             }
-            if (name !== currentUser?.full_name || description !== currentUser?.description || porfilePic !==currentUser?.photoURL) 
+            // if (name !== currentUser?.full_name || description !== currentUser?.description ||porfilePic !== currentUser?.photoURL ) 
+           else   
             {
+
                 await updateDoc(userDocRef, {
                     description: description,
                     full_name: name,
-                    photoURL: porfilePic
-
+                    // photoURL: porfilePic
 
                 });
             } 
@@ -184,7 +186,7 @@ const updatePorfile = async () => {
                         <div className='porfile_section-container1'>
 
                             <div className='porfile_section-porfilePic'>
-                                <img className='porfile_section-pic' src={porfilePic}></img>
+                                <img className='porfile_section-pic' src={porfilePic} alt='porfilePic'></img>
                                 <p className='porfile_section-username'>{userName}</p>
                                 <button className='porfile_section-logout'onClick={logout}>Log out</button>
                             </div>
