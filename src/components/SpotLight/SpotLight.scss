@@ -1,0 +1,36 @@
+.spot_light{
+    &-title {
+        margin-top: 5vh;
+        text-align: center;
+    }
+    &-container {
+        background-color: #FAF8FA;
+        padding: 3vh;
+        margin: 4vh;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    }
+    &-descriptionPet{
+        text-align: center;
+    }
+    &-image {
+        display: flex;
+        width: 20vh;
+        border-radius: 50%;
+        height: 20vh;
+        margin: auto;
+        margin-top: 2vh;
+    }
+    &-name {
+        text-align: center;
+
+    }
+   
+}
+// .purpose {
+//     background-color: #FAF8FA;
+//         padding: 3vh;
+//         margin: 4vh;
+//         border-radius: 10px;
+//         box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+// }

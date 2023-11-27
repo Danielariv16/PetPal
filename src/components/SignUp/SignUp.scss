@@ -1,0 +1,41 @@
+.existing_user {
+    display: flex;
+    flex-direction: column;
+    &-des {
+       margin: 4vh 1vh 1vh 1vh;
+       text-align: center;
+    }
+}
+
+.Log-In {
+    text-align: center;
+    margin: 0;
+   
+}
+.sign_in{
+    &-email2 {
+        height: 2vh;
+        border-radius: 5px;
+        border: 1px solid  #008080;
+        border-radius: 5px;
+        padding: 0.5rem;
+        margin-bottom: 1vh; 
+    }
+    &-username {
+        height: 2vh;
+        border-radius: 5px;
+        border: 1px solid  #008080;
+        border-radius: 5px;
+        padding: 0.5rem;
+        margin-bottom: 1vh; 
+        width: 58vw;
+    }
+    &-name {
+        height: 2vh;
+        border-radius: 5px;
+        border: 1px solid  #008080;
+        border-radius: 5px;
+        padding: 0.5rem; 
+        margin-bottom: 1vh;    
+    }
+}

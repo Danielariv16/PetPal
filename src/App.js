@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './components/HomePage/HomePage';
+import SpotLight from './components/SpotLight/SpotLight';
+import Porfile from './components/Porfile/Porfile';
+import Comments from './components/Comments/Comments';
+import AddPost from './components/AddPost/AddPost';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/sign-in' element={<SignIn/>}></Route>
+        <Route path='/'element={<HomePage />}></Route>
+        <Route path='/spot-light' element={<SpotLight/>}></Route>
+        <Route path='/porfile' element={<Porfile />}></Route>
+        <Route path='/comments/:id' element={<Comments/>}></Route>
+        <Route path='/add-post' element={<AddPost />}></Route>
+        <Route path='sign-up' element={<SignUp/>}></Route>
+
+      </Routes>
+
+
+
+  </BrowserRouter>
+
+
   );
 }
 

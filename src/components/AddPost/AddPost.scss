@@ -1,0 +1,31 @@
+.add_post {
+    margin: 4vh;
+    &-share{
+        display: flex;
+        align-items: center;
+        height: 5vh;
+        border: none;
+        border-radius: 20px;
+        background-color: #008080 ;
+        color: white;
+        width: 20vw;
+    }
+}
+
+.share-image{
+    height: 3vh;
+    margin-left: 1vh;
+}
+
+#file {
+    display: none;
+}
+
+.add_post-desc {
+    width: 100%;
+    resize: none;
+    height: 10vh;
+    border-radius: 5px;
+    border-color: #008080;
+    margin-bottom: 1rem;
+}
