@@ -40,7 +40,7 @@
 
 .comment-input {
     border-radius: 5px;
-    width: 95vw;
+    width: 75vw;
     resize: none; 
     position: fixed;
     bottom: 0;
@@ -51,13 +51,14 @@
     border-radius: 5px;
     position: fixed;
     bottom: 0;
-    left: 28.8rem;
+    left: 19rem;
     margin-bottom: 2vh;
     padding: 1vh;
-    height: 5vh;
+    height: 6vh;
     background-color: #008080;
     border: none;
     color: white;
+    width: 13vw;
 
 }
 .all_comments {

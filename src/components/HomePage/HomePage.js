@@ -115,7 +115,7 @@ function HomePage(){
                             <img
                                 className='like'
                                 src={userLikedPosts.includes(data.id) ? likeHeart : heartIcon}
-                                onClick={addLike}
+                                onClick={() => addLike(data.id)}
                             ></img>
                             {likesAmount &&
                             <p className='likes-amount'>Likes: {likesAmount} </p>

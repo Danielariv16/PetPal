@@ -8,6 +8,7 @@
 }
 .porfileName{
     margin: 2vh 0 0 1vh;
+    font-size: 1rem;
 }
 .main-porfilePic{
     border-radius: 50%;
@@ -41,11 +42,16 @@
     align-items: center;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    
+
+
+flex-wrap: wrap
 }
 .porfileName-description{
     margin: 0;
     margin-right: 1vh;
     font-weight:500;
+    font-size: 0.7rem;
 }
 .description {
     margin: 0;

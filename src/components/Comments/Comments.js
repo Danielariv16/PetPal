@@ -23,7 +23,7 @@ function Comments(){
             comment_text: comment,
             post_id:id,
             user_id:user.uid,
-            username: user.displayName
+            username: user.displayName,
 
         })
     }
@@ -46,6 +46,7 @@ function Comments(){
     const handleBackClick = () => {
         window.history.back();
       };
+
     
     return (
         <section className='comments_section'>
