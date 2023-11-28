@@ -52,7 +52,8 @@ function AddPost(){
                 user_id: user.uid,
                 image_url: uploadUrl,
                 username: user.displayName,
-                porfilePic: currentUser.photoURL
+                porfilePic: currentUser.photoURL,
+                likes: ''
             })
             navigate('/');
 
