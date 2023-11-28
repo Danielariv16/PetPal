@@ -4,6 +4,8 @@ import next from '../../images/next.png';
 import noPhoto from '../../images/no-photo.png'
 import axios from 'axios';
 import {useEffect, useState} from 'react'
+import { Link } from "react-router-dom";
+
 
 
 function SpotLight(){
@@ -57,7 +59,13 @@ function SpotLight(){
                 <h5 className='spot_light-name'>{adoptionPets[currentPetIndex].name}</h5>
                 <p className='spot_light-descriptionPet'>{adoptionPets[currentPetIndex].description}</p>
                 <div className='spot_light-buttons'>
-                    <button className='spot_light-interested'>Want to learn more about {adoptionPets[currentPetIndex].name}? Click here</button>
+                    <a
+                        href={adoptionPets[currentPetIndex].url}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                    >
+                        <button className='spot_light-interested'>Want to learn more about {adoptionPets[currentPetIndex].name}? Click here</button>
+                    </a>
                     <button className='spot_light-buttonLink' 
                     onClick={handleNext}>
                     <img alt='next image' src={next} 
