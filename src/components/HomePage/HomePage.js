@@ -107,12 +107,6 @@ function HomePage(){
                             <h6 className='porfileName'>{data.username}</h6>
                         </div>
                         <img className='postPic' src={data.image_url}></img>
-                        {data.caption && (
-                            <div className='descriptionWname'>
-                            <p className='porfileName-description'>{data.username}</p>
-                            <p className='description'>{data.caption}</p>
-                            </div>
-                            )}                        
                             <div className='reaction-container'>
                             {/* <img className='like' src={heartIcon} onClick={addLike}></img> */}
                             <img
@@ -120,13 +114,19 @@ function HomePage(){
                                 src={userLikedPosts.includes(data.id) ? likeHeart : heartIcon}
                                 onClick={() => addLike(data.id)}
                             ></img>
-                            {data.likes &&
-                            <p className='likes-amount'>Likes: {data.likes.length} </p>
-                            }
                             <Link to={`/comments/${data.id}`}>
                             <img className='comment' src={commentIcon}></img>
                             </Link>
                         </div>
+                        {data.likes &&
+                        <p className='likes-amount'>{data.likes.length} likes</p>
+                        }
+                        {data.caption && (
+                            <div className='descriptionWname'>
+                            <p className='porfileName-description'>{data.username}</p>
+                            <p className='description'>{data.caption}</p>
+                            </div>
+                            )}                        
                     </>
                     ))}
             </main>
