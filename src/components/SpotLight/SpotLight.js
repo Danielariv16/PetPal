@@ -1,8 +1,10 @@
 import Header from '../Header/Header';
 import './SpotLight.scss'
-import zeldris from '../../images/Untitled design.jpg';
+import next from '../../images/next.png';
+import noPhoto from '../../images/no-photo.png'
 import axios from 'axios';
 import {useEffect, useState} from 'react'
+
 
 function SpotLight(){
 
@@ -13,6 +15,7 @@ function SpotLight(){
     const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5V3p4eFdzWHJkdUdkZG5XM1RkZGM0TW95TjVkMHdOSWI5V0ZScUxuWEM4NG4zaDhlZiIsImp0aSI6IjY3YzczYWFkMDRhNDM1YzI2YjU0MWQ3ZmIzMjQwNTEyYjYwN2VkOWYyOTk0YzFjZDNiNDZmM2M1NTI2MTViYWY4NTdjMDNjM2YzYjA1NmRiIiwiaWF0IjoxNzAxMjA2NzYwLCJuYmYiOjE3MDEyMDY3NjAsImV4cCI6MTcwMTIxMDM2MCwic3ViIjoiIiwic2NvcGVzIjpbXX0.JHnX88S5z27bEPrHPXefqcnmzyG4NfSMHYdoq828R0R3MMo0kvNAE9HnmodJqp7Gi1T3m3JzF7mafl3dlbCN3ItMiYShsFPSocP9-hpoWs0dogN40Vgr0CykZFfMjl49P4IPZ09NjMcXB__lWijCXt35912z5C0uSd-ARwKn75_tu9BNUhnsL3cYTFIpcebIuohtHlHh5iSNvmkutvnkp8UXFidaVAQvJQGpVHNZED70g-tE2may8df9YEUelhYQvsh6Mzzwp3zrMk_SG4VRH-mSdov6xNwOnCAexBPN9s4MZ6yM-RUsUzLzSD9jvXgDGI6obbEFdylr_G3Uc_GLlQ";
 
     const apiUrl = 'https://api.petfinder.com/v2/animals';
+    console.log(adoptionPets)
 
 
     useEffect(() => {
@@ -48,14 +51,20 @@ function SpotLight(){
               <div className='spot_light-container'>
                 <img
                   className='spot_light-image'
-                  src={adoptionPets[currentPetIndex].photos[0]?.medium || 'placeholder-image.jpg'}
+                  src={adoptionPets[currentPetIndex].photos[0]?.medium || noPhoto}
                   alt={adoptionPets[currentPetIndex].name}
                 />
                 <h5 className='spot_light-name'>{adoptionPets[currentPetIndex].name}</h5>
                 <p className='spot_light-descriptionPet'>{adoptionPets[currentPetIndex].description}</p>
-                <button className='spot_light-buttonLink' onClick={handleNext}>
-                  Next
-                </button>
+                <div className='spot_light-buttons'>
+                    <button className='spot_light-interested'>Want to learn more about {adoptionPets[currentPetIndex].name}? Click here</button>
+                    <button className='spot_light-buttonLink' 
+                    onClick={handleNext}>
+                    <img alt='next image' src={next} 
+                    className='spot_light-buttonNext'>
+                    </img>
+                    </button>
+                </div>
               </div>
             )}
           </section>
