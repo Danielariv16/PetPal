@@ -1,10 +1,7 @@
-
-.HomePage{
-    margin: 1vh;
-}
 .main-picName{
     display: flex;
-    align-items: center
+    align-items: center;
+    margin: 0 0.5rem;
 }
 .porfileName{
     margin: 2vh 0 0 1vh;
@@ -36,16 +33,14 @@
 .reaction-container{
     display: flex;
     align-items: center;
+    margin:  0 0.5rem;
+
 }
 .descriptionWname {
     display: flex;
     align-items: center;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    
-
-
-flex-wrap: wrap
+    margin: 0.5rem;
+    flex-wrap: wrap
 }
 .porfileName-description{
     margin: 0;
@@ -55,4 +50,9 @@ flex-wrap: wrap
 }
 .description {
     margin: 0;
+}
+
+.likes-amount {
+    margin: 0 1rem 0 0.5rem;
+
 }

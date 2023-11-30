@@ -25,12 +25,22 @@
         text-align: center;
 
     }
+    &-buttonLink{
+        border: none;
+        background:none;
+    }
+    &-buttonNext{
+        margin-left: 4rem;
+    }
+    &-interested{
+        width: 45vw;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+    &-buttons {
+        display:flex ;
+    }
    
 }
-// .purpose {
-//     background-color: #FAF8FA;
-//         padding: 3vh;
-//         margin: 4vh;
-//         border-radius: 10px;
-//         box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
-// }
+

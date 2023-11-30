@@ -116,15 +116,13 @@ const updatePorfile = async () => {
                 });
 
             }
-            // if (name !== currentUser?.full_name || description !== currentUser?.description ||porfilePic !== currentUser?.photoURL ) 
-           else   
+            if (name !== currentUser?.full_name || description !== currentUser?.description ) 
+            
             {
 
                 await updateDoc(userDocRef, {
                     description: description,
-                    full_name: name,
-                    // photoURL: porfilePic
-
+                    full_name: name
                 });
             } 
 

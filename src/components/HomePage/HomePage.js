@@ -5,7 +5,8 @@ import Header from '../Header/Header';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { db, auth } from '../../config/firebase';
-import { getDocs, collection, addDoc, query, where, deleteDoc } from 'firebase/firestore'
+import { getDocs, collection, doc,
+    getDoc, setDoc} from 'firebase/firestore'
 import likeHeart from '../../images/heartLikeFill.png';
 
 
@@ -15,15 +16,12 @@ function HomePage(){
     const user = auth.currentUser;
 
     const postTable = collection(db, 'Post-Table');
-    const likesTable = collection(db, 'likes')
 
     const [descriptionImage, setDescriptionImage] = useState([]);
-    const [likesAmount, setLikesAmount] = useState(null)
     const [userLikedPosts, setUserLikedPosts] = useState([]); // New state to store posts liked by the user
 
 
-    const postId = descriptionImage.map(id => id.id) //array
-    const likes = query(likesTable, where('post_id', '==', postId ))
+    // const postId = descriptionImage.map(id => id.id) 
     
     useEffect(() => {
         const post = async() => {
@@ -46,49 +44,90 @@ function HomePage(){
     }, [])
     
 
+
     const getLikes = async () => {
         try {
-            const data = await getDocs(likes);
-            setLikesAmount(data.docs.length);
-
-            const likedPosts = data.docs.map(doc => doc.data().post_id);
-            setUserLikedPosts(likedPosts);
+            const data = await getDocs(postTable);
+            const posts = data.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+    
+            setDescriptionImage(posts);
         } catch (error) {
             console.error(error);
         }
     };
+    
+    
 
     useEffect(()=> {
         getLikes()
     }, [descriptionImage])
     
 
-    const addLike = async()=> {
 
+    // const addLike = async (postId) => {
+    //     try {
+    //         const postRef = doc(postTable, postId);
+    //         const postSnapshot = await getDoc(postRef);
+    
+    //         if (postSnapshot.exists()) {
+    //             const post = postSnapshot.data();
+    //             const likedUsers = post.likes || [];
+    
+    //             if (likedUsers.includes(user.uid)) {
+    //                 const updatedLikedUsers = likedUsers.filter((userId) => userId !== user.uid);
+    //                 await setDoc(postRef, { likes: updatedLikedUsers }, { merge: true });
+    //             } else {
+    //                 likedUsers.push(user.uid);
+    //                 await setDoc(postRef, { likes: likedUsers }, { merge: true });
+    //             }
+    //                 getLikes();
+    //         }
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
+
+    const addLike = async (postId) => {
         try {
-        
-              const likeQuery = query(likesTable, where('post_id', '==', postId), where('user_id', '==', user.uid));
-              const likeSnapshot = await getDocs(likeQuery);
-        
-              if (!likeSnapshot.empty) {
-                const likeDoc = likeSnapshot.docs[0];
-                await deleteDoc(likeDoc.ref);
-              }
-
-            else {
-              await addDoc(likesTable, {
-                post_id: postId,
-                user_id: user.uid,
-              });
-              setLikesAmount(likesAmount + 1);
+            const postRef = doc(postTable, postId);
+            const postSnapshot = await getDoc(postRef);
+    
+            if (postSnapshot.exists()) {
+                const post = postSnapshot.data();
+                const likedUsers = post.likes || [];
+    
+                if (likedUsers.includes(user.uid)) {
+                    // User has already liked the post, remove their like
+                    const updatedLikedUsers = likedUsers.filter((userId) => userId !== user.uid);
+                    await setDoc(postRef, { likes: updatedLikedUsers }, { merge: true });
+                } else {
+                    // User hasn't liked the post, add their like
+                    likedUsers.push(user.uid);
+                    await setDoc(postRef, { likes: likedUsers }, { merge: true });
+                }
+    
+                // Update the state for the specific post
+                setDescriptionImage((prevPosts) => {
+                    return prevPosts.map((prevPost) => {
+                        if (prevPost.id === postId) {
+                            return { ...prevPost, likes: likedUsers };
+                        } else {
+                            return prevPost;
+                        }
+                    });
+                });
             }
-            getLikes();
-
-        } 
-        catch(err){
-            console.error(err)
-            }
+        } catch (err) {
+            console.error(err);
         }
+    };
+    
+    
+    
+    
 
 
     return (
@@ -104,12 +143,6 @@ function HomePage(){
                             <h6 className='porfileName'>{data.username}</h6>
                         </div>
                         <img className='postPic' src={data.image_url}></img>
-                        {data.caption && (
-                            <div className='descriptionWname'>
-                            <p className='porfileName-description'>{data.username}</p>
-                            <p className='description'>{data.caption}</p>
-                            </div>
-                            )}                        
                             <div className='reaction-container'>
                             {/* <img className='like' src={heartIcon} onClick={addLike}></img> */}
                             <img
@@ -117,13 +150,20 @@ function HomePage(){
                                 src={userLikedPosts.includes(data.id) ? likeHeart : heartIcon}
                                 onClick={() => addLike(data.id)}
                             ></img>
-                            {likesAmount &&
-                            <p className='likes-amount'>Likes: {likesAmount} </p>
-                            }
                             <Link to={`/comments/${data.id}`}>
                             <img className='comment' src={commentIcon}></img>
                             </Link>
                         </div>
+                        {data.likes &&
+                        <p className='likes-amount'>{data.likes.length} likes
+                        </p>
+                        }
+                        {data.caption && (
+                            <div className='descriptionWname'>
+                            <p className='porfileName-description'>{data.username}</p>
+                            <p className='description'>{data.caption}</p>
+                            </div>
+                            )}                        
                     </>
                     ))}
             </main>

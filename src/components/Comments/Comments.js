@@ -13,7 +13,9 @@ function Comments(){
     const [comments, setComments] = useState([]);
 
     const commentsCollection = collection(db, 'comments')
+
     const user = auth.currentUser;
+    // console.log(user)
            
     const postComment = async(e) => {
         e.preventDefault();
@@ -24,8 +26,13 @@ function Comments(){
             post_id:id,
             user_id:user.uid,
             username: user.displayName,
+            profilePic:''
+
 
         })
+
+        setComment('');
+
     }
 
 
@@ -36,11 +43,15 @@ function Comments(){
             ...doc.data(),
             id: doc.id,
           }));
+
+          
           setComments(updatedComments);
         });
       
         return () => commentsOfPost();
       }, [commentsCollection, id]);
+
+      
 
 
     const handleBackClick = () => {
@@ -61,8 +72,8 @@ function Comments(){
                     </div>
             {comments?.map((comment) =>(
                 <>
-                    <div className='all_comments'>
-                        {/* <img className='comments_section-profile'></img> */}
+                    <div className='all_comments' key={comment.id}>
+                        {/* <img className='comments_section-profile' src={comment.profilePic}></img> */}
                         <div className='comments_section-profile'></div>
                             {comment.comment_text && (
                         <div className='all_comments-commentName'>
@@ -75,10 +86,10 @@ function Comments(){
                     </div>
                 </>
             ))}
-            <footer className='footer'>
+            <section className='comment_input-container'>
                 <textarea className='comment-input' placeholder='Add a comment for ...' onChange={(e) => setComment(e.target.value)}></textarea>
                 <button type='buttton'className='button-comment' onClick={postComment}>Post</button>
-            </footer>
+            </section>
         </section>
     )
 }

@@ -13,6 +13,7 @@ import { getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
 
 
+
 function AddPost(){
 
     const [uploadImage, setUploadImage] =  useState(null);
@@ -52,7 +53,8 @@ function AddPost(){
                 user_id: user.uid,
                 image_url: uploadUrl,
                 username: user.displayName,
-                porfilePic: currentUser.photoURL
+                porfilePic: currentUser.photoURL,
+                likes: ''
             })
             navigate('/');
 
