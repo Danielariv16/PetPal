@@ -67,6 +67,29 @@ function HomePage(){
     
 
 
+    // const addLike = async (postId) => {
+    //     try {
+    //         const postRef = doc(postTable, postId);
+    //         const postSnapshot = await getDoc(postRef);
+    
+    //         if (postSnapshot.exists()) {
+    //             const post = postSnapshot.data();
+    //             const likedUsers = post.likes || [];
+    
+    //             if (likedUsers.includes(user.uid)) {
+    //                 const updatedLikedUsers = likedUsers.filter((userId) => userId !== user.uid);
+    //                 await setDoc(postRef, { likes: updatedLikedUsers }, { merge: true });
+    //             } else {
+    //                 likedUsers.push(user.uid);
+    //                 await setDoc(postRef, { likes: likedUsers }, { merge: true });
+    //             }
+    //                 getLikes();
+    //         }
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
+
     const addLike = async (postId) => {
         try {
             const postRef = doc(postTable, postId);
@@ -77,18 +100,31 @@ function HomePage(){
                 const likedUsers = post.likes || [];
     
                 if (likedUsers.includes(user.uid)) {
+                    // User has already liked the post, remove their like
                     const updatedLikedUsers = likedUsers.filter((userId) => userId !== user.uid);
                     await setDoc(postRef, { likes: updatedLikedUsers }, { merge: true });
                 } else {
+                    // User hasn't liked the post, add their like
                     likedUsers.push(user.uid);
                     await setDoc(postRef, { likes: likedUsers }, { merge: true });
                 }
-                    getLikes();
+    
+                // Update the state for the specific post
+                setDescriptionImage((prevPosts) => {
+                    return prevPosts.map((prevPost) => {
+                        if (prevPost.id === postId) {
+                            return { ...prevPost, likes: likedUsers };
+                        } else {
+                            return prevPost;
+                        }
+                    });
+                });
             }
         } catch (err) {
             console.error(err);
         }
     };
+    
     
     
     
@@ -119,7 +155,8 @@ function HomePage(){
                             </Link>
                         </div>
                         {data.likes &&
-                        <p className='likes-amount'>{data.likes.length} likes</p>
+                        <p className='likes-amount'>{data.likes.length} likes
+                        </p>
                         }
                         {data.caption && (
                             <div className='descriptionWname'>

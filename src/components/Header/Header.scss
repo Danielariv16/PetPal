@@ -1,8 +1,13 @@
 .navtab {
+    position: fixed;
+    bottom: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 0.5px solid #0080803D;
+    border-top: 0.5px solid #0080803D;
+    width: 100%;
+    background-color: #FFFFFF    ;
+
 }
 .icon{
 

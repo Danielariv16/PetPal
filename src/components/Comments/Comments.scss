@@ -40,11 +40,10 @@
 
 .comment-input {
     border-radius: 5px;
-    width: 75vw;
+    width: 80vw;
     resize: none; 
     position: fixed;
     bottom: 0;
-    margin-bottom: 2vh;
     border: 2px solid #0080803D;
 }
 .button-comment {
@@ -52,7 +51,6 @@
     position: fixed;
     bottom: 0;
     left: 19rem;
-    margin-bottom: 2vh;
     padding: 1vh;
     height: 6vh;
     background-color: #008080;
@@ -64,19 +62,20 @@
 .all_comments {
     display: flex;
     margin: 1vh;
+
    &-name {
     margin: 0;
    }
    &-commentName{
-    width: 100%;
+    width: 85%;
+    word-wrap: break-word;  
+    overflow-wrap: break-word; 
    }
 
 }
 .post-comment {
     margin: 0;
+
 }
 
-.footer{
-    background-color: #fff;
-}
 
